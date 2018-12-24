@@ -1,22 +1,10 @@
 import logger from "./logger";
+import UpdateProcessor from "./updateProcessor";
 
 function registerGlobals(casparCG){
+    const updateProcessor = new UpdateProcessor(casparCG);
     window.update = (templateData) => {
-        if(typeof(templateData) === "string"){
-            var json = {};
-            try {
-                templateData = JSON.parse(decodeURI(templateData));
-            } catch (e) {console.log(e);}
-        }
-        templateData = templateData || {};
-
-        for (var key in templateData) {
-            if(key === "debug"){
-                logger.setDebugWindow(templateData[key]);
-                continue;
-            }
-            casparCG.updateText(key, templateData[key]);
-        }
+        updateProcessor.process(templateData)
     }
 
     window.play = () => {
@@ -29,6 +17,10 @@ function registerGlobals(casparCG){
 
     window.next = () => {
         casparCG.next();
+    }
+
+    window.setDebug = (debug) => {
+        logger.setDebugWindow(debug);
     }
 
     window.casparcg = casparCG;

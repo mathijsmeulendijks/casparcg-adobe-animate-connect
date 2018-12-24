@@ -30,11 +30,14 @@ class casparcg {
         this.elements[element.name] = element;
     }
 
-    updateText(elementName, text){
-        logger.log("Updating: " + elementName+":"+text);
-        (this.elements[elementName] || {}).text = text;
+    updateText(element, text){
+        logger.log("Updating: " + element.name+":"+text);
+        (element || {}).text = text;
     }
 
+    getElement(name){
+        return this.elements[name] || null;
+    }
     // start, stop, next placeholders
     stop(){}
     play(){}
