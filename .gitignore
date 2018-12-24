@@ -86,6 +86,7 @@ typings/
 
 # Build
 build
+dist
 
 # IDE
 .idea
