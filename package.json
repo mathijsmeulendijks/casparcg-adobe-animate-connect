@@ -1,0 +1,32 @@
+{
+  "name": "casparcg-adobe-animate-connect",
+  "version": "0.0.1",
+  "description": "Connect CasparCG to adobe animate html canvas projects",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel --presets es2015 index.js --out-file build/casparcg-adobe-animate-connect.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathijsmeulendijks/casparcg-adobe-animate-connect.git"
+  },
+  "keywords": [
+    "casparcg",
+    "adobe",
+    "animate",
+    "template",
+    "html",
+    "canvas"
+  ],
+  "author": "Mathijs Meulendijks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mathijsmeulendijks/casparcg-adobe-animate-connect/issues"
+  },
+  "homepage": "https://github.com/mathijsmeulendijks/casparcg-adobe-animate-connect#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
