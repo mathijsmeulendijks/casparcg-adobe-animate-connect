@@ -4,7 +4,10 @@ import logger from "./logger";
 class UpdateProcessor {
 
     constructor(casparCG){
+        this.registered = this.registered.bind(this);
         this.casparCG = casparCG;
+        this.unprocessed = {};
+        this.casparCG.onRegister = this.registered;
     }
 
     processDebug(debug){
@@ -16,7 +19,10 @@ class UpdateProcessor {
             try {
                 templateData = JSON.parse(decodeURI(templateData));
             } catch (e) {
-                logger.log(e);
+                logger.log("Error decrypting JSON:" + e);
+                logger.log("DATA:");
+                logger.log(templateData);
+                return {};
             }
         }
         return templateData || {};
@@ -55,6 +61,17 @@ class UpdateProcessor {
         element[invokeItem.function].apply(element, invokeItem.args);
     }
 
+    registered(element){
+        if(this.unprocessed[element.name]){
+            let data = {};
+            for(var key in this.unprocessed[element.name]){
+                data[element.name] = this.unprocessed[element.name][key];
+                this.process(data)
+            }
+            delete this.unprocessed[element.name];
+        }
+    }
+
     process(templateData) {
         templateData = this.processTemplateData(templateData);
 
@@ -67,6 +84,10 @@ class UpdateProcessor {
             var element = this.casparCG.getElement(key);
             if(!element){
                 logger.log('Element not found! Name:' + key);
+                if(!this.unprocessed[key]){
+                    this.unprocessed[key] = [];
+                }
+                this.unprocessed[key].push(templateData[key]);
                 continue;
             }
 

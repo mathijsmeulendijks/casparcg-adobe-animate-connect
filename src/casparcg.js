@@ -4,6 +4,7 @@ class casparcg {
     constructor(){
         this.timeline = null;
         this.elements = {};
+        this.onRegister = null;
     }
 
     // Init is called by the animate project on the first frame
@@ -15,7 +16,7 @@ class casparcg {
             logger.log("Stopping");
         };
         this.play = () => {
-            this.timeline.gotoAndPlay(0);
+            this.timeline.gotoAndPlay(1);
             logger.log("Playing");
         };
         this.next = () => {
@@ -28,6 +29,9 @@ class casparcg {
     register(element){
         logger.log("Register " + element.name);
         this.elements[element.name] = element;
+        if(this.onRegister){
+            this.onRegister(element);
+        }
     }
 
     updateText(element, text){

@@ -1,7 +1,9 @@
 import logger from "./logger";
 import UpdateProcessor from "./updateProcessor";
+import casparCG from "./casparcg";
 
 function registerGlobals(casparCG){
+
     const updateProcessor = new UpdateProcessor(casparCG);
     window.update = (templateData) => {
         updateProcessor.process(templateData)

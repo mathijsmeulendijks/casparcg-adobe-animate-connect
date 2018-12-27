@@ -1,12 +1,15 @@
 import logger from './logger';
-import casparcg from "./casparcg"
+import casparCG from "./casparcg"
 import registerGlobals from "./registerGlobals"
 
-registerGlobals(casparcg);
+
+registerGlobals(casparCG);
 
 logger.log(window.location)
 logger.log('Chrome: ' + window.navigator.userAgent.match(/Chrome\/([^ ]+)/)[1])
 logger.log('window.caspar: ' + !!window.caspar);
+
+
 
 
 
